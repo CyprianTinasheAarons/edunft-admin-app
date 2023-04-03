@@ -20,8 +20,8 @@ const AddReward = () => {
   const [search, setSearch] = useState("");
   const [selectedStudent, setSelectedStudent] = useState({});
   const address = useAddress();
-  const contractAddress = "0x0D3Cf7cbb6323ec344DEcBBe64a3EdA4f3737794";
-  const { contract, error } = useContract(contractAddress);
+  const contractAddress = "0xa4ebc7Da77088e2F2f684C89695F76a3d6Ce0E31";
+  const { contract } = useContract(contractAddress);
 
   const [reward, setReward] = useState({
     name: "",
@@ -29,7 +29,7 @@ const AddReward = () => {
     image: url,
     student: selectedStudent,
     teacher: { name: "Mr. John Doe", walletAddress: address },
-    rewardId: Math.floor(Math.random() * 100),
+    rewardId: 0,
     metadataURI: storage?.hash,
     transactionHash: "",
   });
@@ -92,6 +92,14 @@ const AddReward = () => {
   };
 
   const submitReward = async () => {
+    let supply;
+
+    await contract.call("getTotalSupply").then((data) => {
+      setReward({ ...reward, rewardId: data + 1 });
+      supply = data;
+      console.log("supply", data);
+    });
+
     dispatch(
       giveReward({
         name: reward.name,
@@ -100,7 +108,7 @@ const AddReward = () => {
         student: selectedStudent.walletAddress,
         teacher: reward.teacher.walletAddress,
         school: selectedStudent.school,
-        rewardId: reward.rewardId,
+        rewardId: supply + 1,
         metadataURI: reward.metadataURI,
       })
     );
@@ -110,7 +118,7 @@ const AddReward = () => {
       image: "",
       student: {},
       teacher: {},
-      rewardId: Math.floor(Math.random() * 100),
+      rewardId: 0,
       metadataURI: "",
       transactionHash: "",
     });

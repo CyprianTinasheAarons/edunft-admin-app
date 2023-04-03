@@ -5,7 +5,7 @@ import { useState, useEffect } from "react";
 const TeacherManager = () => {
   const toast = useToast();
   const [address, setAddress] = useState("");
-  const contractAddress = "0x0D3Cf7cbb6323ec344DEcBBe64a3EdA4f3737794";
+  const contractAddress = "0xa4ebc7Da77088e2F2f684C89695F76a3d6Ce0E31";
   const { contract, error } = useContract(contractAddress);
 
   const submitToast = () => {
