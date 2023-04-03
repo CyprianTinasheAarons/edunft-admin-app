@@ -18,6 +18,7 @@ const AddReward = () => {
   const { storage, isLoadingStorage } = useSelector((state) => state.storage);
 
   const [search, setSearch] = useState("");
+  const [supply, setSupply] = useState(0);
   const [selectedStudent, setSelectedStudent] = useState({});
   const address = useAddress();
   const contractAddress = "0xa4ebc7Da77088e2F2f684C89695F76a3d6Ce0E31";
@@ -55,35 +56,47 @@ const AddReward = () => {
   };
 
   const saveMetadata = async () => {
-    const metadata = {
-      name: reward.name,
-      description: reward.description,
-      image: url,
-      attributes: [
-        {
-          trait_type: "Reward",
-          value: reward.name,
-        },
-        { trait_type: "Edition", value: "1" },
-
-        {
-          trait_type: "Student",
-          value: selectedStudent.name,
-        },
-        {
-          trait_type: "Teacher",
-          value: "Mr. John Doe",
-        },
-        {
-          trait_type: "Date",
-          value: new Date().toDateString(),
-        },
-      ],
-    };
-    await dispatch(uploadMetadata(metadata))
-      .unwrap()
+    await contract
+      .call("getTotalSupply")
       .then((data) => {
-        setReward({ ...reward, metadataURI: data });
+        setReward({ ...reward, rewardId: data.toNumber() + 1 });
+        setSupply(data + 1);
+        console.log(selectedStudent);
+
+        const metadata = {
+          name: reward.name,
+          description: reward.description,
+          image: url,
+          attributes: [
+            {
+              trait_type: "Reward",
+              value: reward?.name,
+            },
+            { trait_type: "Edition", value: data.toNumber() + 1 },
+
+            {
+              trait_type: "Student",
+              value: selectedStudent?.walletAddress,
+            },
+            {
+              trait_type: "Teacher",
+              value: address,
+            },
+            {
+              trait_type: "Date",
+              value: new Date().toDateString(),
+            },
+          ],
+        };
+
+        dispatch(uploadMetadata(metadata))
+          .unwrap()
+          .then((data) => {
+            setReward({ ...reward, metadataURI: data });
+          });
+      })
+      .catch((err) => {
+        console.log(err);
       });
   };
 
@@ -92,26 +105,23 @@ const AddReward = () => {
   };
 
   const submitReward = async () => {
-    let supply;
-
     await contract.call("getTotalSupply").then((data) => {
-      setReward({ ...reward, rewardId: data + 1 });
-      supply = data;
-      console.log("supply", data);
+      setReward({ ...reward, rewardId: data.toNumber() + 1 });
+
+      dispatch(
+        giveReward({
+          name: reward.name,
+          description: reward.description,
+          image: reward.image,
+          student: selectedStudent.walletAddress,
+          teacher: reward.teacher.walletAddress,
+          school: selectedStudent.school,
+          rewardId: data.toNumber() + 1,
+          metadataURI: reward.metadataURI,
+        })
+      );
     });
 
-    dispatch(
-      giveReward({
-        name: reward.name,
-        description: reward.description,
-        image: reward.image,
-        student: selectedStudent.walletAddress,
-        teacher: reward.teacher.walletAddress,
-        school: selectedStudent.school,
-        rewardId: supply + 1,
-        metadataURI: reward.metadataURI,
-      })
-    );
     setReward({
       name: "",
       description: "",
@@ -436,7 +446,7 @@ const AddReward = () => {
                   contractAddress={contractAddress}
                   action={async (contract) => {
                     await contract.call("awardReward", [
-                      reward.rewardId,
+                      supply,
                       selectedStudent.walletAddress,
                       storage.hash,
                     ]);
