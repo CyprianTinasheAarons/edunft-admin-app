@@ -4,8 +4,8 @@ const nextConfig = {
   async rewrites() {
     return [
       {
-        source: "/api/auth/web3/:path*",
-        destination: "http://localhost:8080/api/auth/web3/:path*", // Proxy to Backend
+        source: "https://edunft-admin-app.vercel.app/api/auth/web3/:path*",
+        destination: "https://edu-nft-demo.onrender.com/api/auth/web3/:path*", // Proxy to Backend
       },
     ];
   },
