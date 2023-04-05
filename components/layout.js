@@ -100,9 +100,14 @@ export default function Layout({ children }) {
                   </Transition.Child>
                   {/* Sidebar component, swap this element with another sidebar if you like */}
                   <div className="flex flex-col px-6 pb-4 overflow-y-auto bg-indigo-600 grow gap-y-5">
-                    <Link href="/" className="flex items-center h-16 shrink-0">
-                      <h1 className="text-2xl font-bold text-white uppercase">
-                        Edunft | Admin
+                    <Link href="/" className="flex flex-col items-center h-16 py-2 shrink-0">
+                      <img
+                        src="/logo_w.png"
+                        alt="logo"
+                        className="w-auto h-12 mx-auto"
+                      />
+                      <h1 className="text-xl font-bold text-white uppercase">
+                        Admin
                       </h1>
                     </Link>
                     <nav className="flex flex-col flex-1">
@@ -161,10 +166,13 @@ export default function Layout({ children }) {
         <div className="hidden lg:fixed lg:inset-y-0 lg:z-50 lg:flex lg:w-72 lg:flex-col">
           {/* Sidebar component, swap this element with another sidebar if you like */}
           <div className="flex flex-col px-6 pb-4 overflow-y-auto bg-indigo-600 grow gap-y-5">
-            <div className="flex items-center h-16 shrink-0">
-              <h1 className="text-2xl font-bold text-white uppercase">
-                Edunft | Admin
-              </h1>
+            <div className="flex flex-col items-center h-16 py-2 shrink-0">
+              <img
+                src="/logo_w.png"
+                alt="logo"
+                className="w-auto h-12 mx-auto"
+              />
+              <h1 className="text-xl font-bold text-white uppercase">Admin</h1>
             </div>
             <nav className="flex flex-col flex-1">
               <ul role="list" className="flex flex-col flex-1 gap-y-7">

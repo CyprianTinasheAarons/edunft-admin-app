@@ -36,19 +36,17 @@ export default function Login() {
   }
 
   return (
-    <>
-      <div className="flex flex-col justify-center min-h-full py-12 sm:px-6 lg:px-8">
+    <div className="flex h-screen">
+      <div className="w-full m-auto">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
-          <h1 className="text-4xl font-bold text-center text-gray-900">
-            EDUNFT |Admin
+          <img src="/logo.png" alt="logo" className="w-auto h-12 mx-auto" />
+          <h1 className="text-xl font-bold text-center text-gray-900 uppercase">
+            Admin
           </h1>
-          <h2 className="mt-6 text-3xl font-bold tracking-tight text-center text-gray-900">
-            Sign in to your account
-          </h2>
         </div>
 
         <div className="mt-8 sm:mx-auto sm:w-full sm:max-w-md">
-          <div className="px-4 py-8 bg-white shadow sm:rounded-lg sm:px-10">
+          <div className="px-4 py-8 bg-white border-2 border-purple-500 shadow sm:rounded-lg sm:px-10">
             <Form
               schema={loginSchema}
               onSubmit={submitData}
@@ -75,6 +73,6 @@ export default function Login() {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 }

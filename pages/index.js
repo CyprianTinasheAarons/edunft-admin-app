@@ -1,6 +1,6 @@
 import Head from "next/head";
 import { useEffect } from "react";
-import Layout from "../components/Layout";
+import Layout from "../components/layout";
 import withAuth from "@/hoc/withAuth";
 import { useDispatch, useSelector } from "react-redux";
 import { getStats } from "@/slices/stats";
@@ -37,12 +37,12 @@ const Home = () => {
             {statsData.map((item) => (
               <div
                 key={item.name}
-                className="px-4 py-5 overflow-hidden bg-white rounded-lg shadow sm:p-6"
+                className="px-4 py-5 overflow-hidden bg-white border-2 border-indigo-500 rounded-lg shadow sm:p-6"
               >
                 <dt className="text-sm font-medium text-gray-500 truncate">
                   {item.name}
                 </dt>
-                <dd className="mt-1 text-3xl font-semibold tracking-tight text-gray-900">
+                <dd className="mt-1 text-3xl font-semibold tracking-tight text-indigo-900">
                   {isLoadingStats ? <Spinner size={"xs"} /> : item.stat}
                 </dd>
               </div>
