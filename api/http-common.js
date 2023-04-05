@@ -1,8 +1,14 @@
-import axios from 'axios';
+import axios from "axios";
+
+const getBaseUrl = () => {
+  return process.env.NODE_ENV === "production"
+    ? "https://edu-nft-demo.onrender.com/api"
+    : "http://localhost:8080/api";
+};
 
 export default axios.create({
-    baseURL: 'http://localhost:8080/api',
-    headers: {
-        'Content-type': 'application/json'
-    }
+  baseURL: getBaseUrl(),
+  headers: {
+    "Content-type": "application/json",
+  },
 });
