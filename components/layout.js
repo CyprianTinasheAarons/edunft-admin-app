@@ -99,7 +99,7 @@ export default function Layout({ children }) {
                     </div>
                   </Transition.Child>
                   {/* Sidebar component, swap this element with another sidebar if you like */}
-                  <div className="flex flex-col px-6 pb-4 overflow-y-auto bg-indigo-600 grow gap-y-5">
+                  <div className="flex flex-col px-6 pt-8 pb-4 overflow-y-auto bg-indigo-600 grow gap-y-5">
                     <Link href="/" className="flex flex-col items-center h-16 py-2 shrink-0">
                       <img
                         src="/logo_w.png"
@@ -174,7 +174,7 @@ export default function Layout({ children }) {
               />
               <h1 className="text-xl font-bold text-white uppercase">Admin</h1>
             </div>
-            <nav className="flex flex-col flex-1">
+            <nav className="flex flex-col flex-1 mt-10">
               <ul role="list" className="flex flex-col flex-1 gap-y-7">
                 <li>
                   <ul role="list" className="-mx-2 space-y-1">

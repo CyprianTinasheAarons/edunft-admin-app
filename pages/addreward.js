@@ -60,8 +60,8 @@ const AddReward = () => {
       .call("getTotalSupply")
       .then((data) => {
         setReward({ ...reward, rewardId: data.toNumber() + 1 });
-        setSupply(data + 1);
-        console.log(selectedStudent);
+        setSupply(data.toNumber() + 1);
+     
 
         const metadata = {
           name: reward.name,
@@ -107,6 +107,7 @@ const AddReward = () => {
   const submitReward = async () => {
     await contract.call("getTotalSupply").then((data) => {
       setReward({ ...reward, rewardId: data.toNumber() + 1 });
+      console.log("add reward", data.toNumber() + 1);
 
       dispatch(
         giveReward({
@@ -115,7 +116,7 @@ const AddReward = () => {
           image: reward.image,
           student: selectedStudent.walletAddress,
           teacher: reward.teacher.walletAddress,
-          school: selectedStudent.school,
+          college: selectedStudent.college,
           rewardId: data.toNumber() + 1,
           metadataURI: reward.metadataURI,
         })
@@ -408,10 +409,10 @@ const AddReward = () => {
                               </div>
                               <div className="sm:col-span-1">
                                 <dt className="text-sm font-medium text-gray-500">
-                                  School Details
+                                  college Details
                                 </dt>
                                 <dd className="mt-1 text-sm text-gray-900">
-                                  {student.school}
+                                  {student.college}
                                 </dd>
                                 <dd className="mt-1 text-sm text-gray-900">
                                   {student.major}

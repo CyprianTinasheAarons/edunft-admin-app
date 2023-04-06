@@ -28,9 +28,9 @@ const userSchema = {
       minLength: 8,
     },
 
-    school: {
+    college: {
       type: "string",
-      title: "School",
+      title: "College",
     },
     major: {
       type: "string",
@@ -165,10 +165,7 @@ const rewardSchema = {
       type: "string",
       title: "Name",
     },
-    description: {
-      type: "string",
-      title: "Description",
-    },
+
     teacher: {
       type: "object",
       title: "Teacher",

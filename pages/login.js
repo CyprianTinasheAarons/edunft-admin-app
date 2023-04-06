@@ -5,6 +5,7 @@ import Form from "@rjsf/chakra-ui";
 import validator from "@rjsf/validator-ajv8";
 import { login } from "@/slices/auth";
 import { useToast, Spinner } from "@chakra-ui/react";
+import ParticlesBackground from "@/components/particles";
 
 export default function Login() {
   const dispatch = useDispatch();
@@ -36,11 +37,12 @@ export default function Login() {
   }
 
   return (
-    <div className="flex h-screen">
+    <div className="flex h-screen bg-[#131216]">
+      <ParticlesBackground/>
       <div className="w-full m-auto">
         <div className="sm:mx-auto sm:w-full sm:max-w-md">
-          <img src="/logo.png" alt="logo" className="w-auto h-12 mx-auto" />
-          <h1 className="text-xl font-bold text-center text-gray-900 uppercase">
+          <img src="/logo_w.png" alt="logo" className="w-auto h-12 mx-auto" />
+          <h1 className="text-xl font-bold text-center text-white uppercase">
             Admin
           </h1>
         </div>
@@ -54,22 +56,7 @@ export default function Login() {
               liveValidate
             />
 
-            <div className="mt-6">
-              <div className="relative">
-                <div className="absolute inset-0 flex items-center">
-                  <div className="w-full border-t border-gray-300" />
-                </div>
-                <div className="relative flex justify-center text-sm">
-                  <span className="px-2 text-gray-500 bg-white">
-                    Or continue with
-                  </span>
-                </div>
-              </div>
 
-              <div className="flex justify-center w-full">
-                <ConnectWallet />
-              </div>
-            </div>
           </div>
         </div>
       </div>

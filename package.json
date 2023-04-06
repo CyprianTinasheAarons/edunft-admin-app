@@ -36,6 +36,8 @@
     "react-drag-drop-files": "^2.3.9",
     "react-icons": "^4.8.0",
     "react-redux": "^8.0.5",
+    "react-tsparticles": "^2.9.3",
+    "tsparticles": "^2.9.3",
     "wagmi": "^0.12.8"
   },
   "devDependencies": {
